@@ -11,15 +11,8 @@ use std::{
     marker::PhantomData,
     panic::{RefUnwindSafe, UnwindSafe},
     sync::atomic::{AtomicBool, AtomicUsize, Ordering},
+    thread::{self, Thread},
 };
-#[cfg(not(feature = "mesalock_sgx"))]
-use std::thread::{self, Thread};
-
-#[cfg(feature = "mesalock_sgx")]
-use std::thread::{self, SgxThread as Thread};
-
-
-
 
 #[derive(Debug)]
 pub(crate) struct OnceCell<T> {
